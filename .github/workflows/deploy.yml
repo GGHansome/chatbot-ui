@@ -24,7 +24,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --cache ~/.npm
 
       - name: Set up .production.env
         run: |
@@ -35,7 +35,7 @@ jobs:
           echo NEXT_PUBLIC_USER_FILE_SIZE_LIMIT=${{ vars.NEXT_PUBLIC_USER_FILE_SIZE_LIMIT }} >> .production.env
 
       - name: Build the project
-        run: npm run build -- --env .production.env
+        run: npm run build
 
       - name: Move publish to .next/standalone
         run: |
