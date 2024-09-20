@@ -38,9 +38,9 @@ jobs:
         run: npm run build -- --env .production.env
 
       - name: Move publish to .next/standalone
-          run: |
-            mkdir -p .next/standalone
-            mv publish .next/standalone/publish
+        run: |
+          mkdir -p .next/standalone
+          mv publish .next/standalone/publish
 
       - name: Move .next/static to .next/standalone/.next
         run: |
