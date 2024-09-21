@@ -68,7 +68,7 @@ jobs:
           ssh-keyscan 116.205.186.224 >> ~/.ssh/known_hosts
 
       - name: Upload to Server
-        run: rsync -avz --delete ./.next/standalone/ root@116.205.186.224:~/app/standalone/
+        run: rsync -avz --delete .next/standalone/ root@116.205.186.224:~/app/standalone/
 
       - name: Cleanup
         run: rm ~/.ssh/id_rsa
