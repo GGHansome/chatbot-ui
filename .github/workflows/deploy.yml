@@ -8,25 +8,22 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      image: node:20.13.1-slim
+    # container:
+    #   image: node:20.13.1-slim
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
       - name: Install dependencies
         run: |
           npm config set registry https://registry.npmmirror.com
-          npm install --cache ~/.npm
-
-      - name: Cache npm dependencies
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          npm ci
 
       - name: Set up .production.env
         run: |
@@ -39,10 +36,10 @@ jobs:
       - name: Build the project
         run: npm run build
 
-      - name: Move publish to .next/standalone
+      - name: Move public to .next/standalone
         run: |
           mkdir -p .next/standalone
-          mv publish .next/standalone/publish
+          mv public .next/standalone/public
 
       - name: Move .next/static to .next/standalone/.next
         run: |
