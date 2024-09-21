@@ -47,7 +47,7 @@ jobs:
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: standalone
+          name: demo
           path: .next/standalone
 
   deploy:
@@ -58,7 +58,7 @@ jobs:
       - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
-          name: standalone
+          name: demo
 
       - name: Configure SSH
         run: |
@@ -66,6 +66,9 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan 116.205.186.224 >> ~/.ssh/known_hosts
+
+      - name: console all file
+        run: ls -al
 
       - name: Upload to Server
         run: rsync -avz --delete .next/standalone/ root@116.205.186.224:~/app/standalone/
