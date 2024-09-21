@@ -9,22 +9,24 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: node:20-alpine
+      image: node:20.13.1-slim
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Cache npm dependencies
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
       - name: Install dependencies
-        run: npm install --cache ~/.npm
+        run: |
+          npm config set registry https://registry.npmmirror.com
+          npm install --cache ~/.npm
+
+      - name: Cache npm dependencies
+      uses: actions/cache@v2
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
 
       - name: Set up .production.env
         run: |
