@@ -8,8 +8,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # container:
-    #   image: node:20.13.1-slim
 
     steps:
       - name: Checkout code
@@ -67,6 +65,7 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan 116.205.186.224 >> ~/.ssh/known_hosts
 
       - name: Upload to Server
         run: rsync -avz --delete ./.next/standalone/ root@116.205.186.224:~/app/standalone/
