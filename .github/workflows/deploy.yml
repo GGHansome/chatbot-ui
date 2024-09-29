@@ -23,13 +23,13 @@ jobs:
           npm config set registry https://registry.npmmirror.com
           npm ci
 
-      - name: Set up .production.env
+      - name: Set up .env.production
         run: |
-          touch .production.env
-          echo NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }} >> .production.env
-          echo SUPABASE_SERVICE_ROLE_KEY=${{ secrets.SUPABASE_SERVICE_ROLE_KEY }} >> .production.env
-          echo NEXT_PUBLIC_SUPABASE_URL=${{ vars.NEXT_PUBLIC_SUPABASE_URL }} >> .production.env
-          echo NEXT_PUBLIC_USER_FILE_SIZE_LIMIT=${{ vars.NEXT_PUBLIC_USER_FILE_SIZE_LIMIT }} >> .production.env
+          touch .env.production
+          echo NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }} >> .env.production
+          echo SUPABASE_SERVICE_ROLE_KEY=${{ secrets.SUPABASE_SERVICE_ROLE_KEY }} >> .env.production
+          echo NEXT_PUBLIC_SUPABASE_URL=${{ vars.NEXT_PUBLIC_SUPABASE_URL }} >> .env.production
+          echo NEXT_PUBLIC_USER_FILE_SIZE_LIMIT=${{ vars.NEXT_PUBLIC_USER_FILE_SIZE_LIMIT }} >> .env.production
 
       - name: Build the project
         run: npm run build
