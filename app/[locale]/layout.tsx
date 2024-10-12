@@ -10,8 +10,6 @@ import { Inter } from "next/font/google"
 import { cookies } from "next/headers"
 import { ReactNode } from "react"
 import "./globals.css"
-import dns from "dns"
-dns.setServers(["8.8.8.8"])
 
 const inter = Inter({ subsets: ["latin"] })
 const APP_NAME = "Chatbot UI"
