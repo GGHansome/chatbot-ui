@@ -26,8 +26,6 @@ jobs:
       - name: Set up .env.production
         run: |
           touch .env.production
-          echo GLOBAL_AGENT_HTTP_PROXY=socks5://127.0.0.1:1080 >> .env.production
-          echo GLOBAL_AGENT_HTTPS_PROXY=socks5://127.0.0.1:1080 >> .env.production
           echo NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }} >> .env.production
           echo SUPABASE_SERVICE_ROLE_KEY=${{ secrets.SUPABASE_SERVICE_ROLE_KEY }} >> .env.production
           echo NEXT_PUBLIC_SUPABASE_URL=${{ vars.NEXT_PUBLIC_SUPABASE_URL }} >> .env.production
